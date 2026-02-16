@@ -1,0 +1,27 @@
+# Build outputs
+build/
+out/
+bin/
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+
+# Gradle
+.gradle/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test reports
+test-results/
+
+# Docker
+Dockerfile*
+docker-compose*

@@ -1,0 +1,41 @@
+# Development docker-compose with hot-reloading support
+# Use: docker compose -f docker-compose.dev.yml up
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    container_name: taskboard-backend-dev
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend/src:/app/src:ro
+      - ./backend/build.gradle.kts:/app/build.gradle.kts:ro
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SERVER_PORT=8080
+    networks:
+      - taskboard-network-dev
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    container_name: taskboard-frontend-dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend/src:/app/src:ro
+      - ./frontend/tests:/app/tests:ro
+      - ./frontend/index.html:/app/index.html:ro
+    environment:
+      - VITE_API_URL=http://localhost:8080
+    depends_on:
+      - backend
+    networks:
+      - taskboard-network-dev
+
+networks:
+  taskboard-network-dev:
+    driver: bridge
