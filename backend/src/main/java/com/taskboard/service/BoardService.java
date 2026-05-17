@@ -76,10 +76,7 @@ public class BoardService {
     public void deleteBoard(UUID boardId) {
         Board board = boardRepository.findByIdAndDeletedFalse(boardId)
                 .orElseThrow(() -> new BoardNotFoundException(boardId));
-
-        // BUG #1: This is doing hard delete instead of soft delete
-        // The test expects: board.setDeleted(true); boardRepository.save(board);
-        // But the implementation is:
+        
         board.setDeleted(true);
         boardRepository.save(board);
 

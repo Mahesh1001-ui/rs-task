@@ -67,10 +67,6 @@ public class WebSocketEventHandler extends TextWebSocketHandler {
             log.debug("No active sessions for board: {}", boardId);
             return;
         }
-
-        // BUG #2: Message is not being serialized correctly
-        // The event is being sent as toString() instead of JSON
-        // Candidate needs to fix this to use objectMapper.writeValueAsString()
         try {
 //            String message = event.toString(); // Should be: objectMapper.writeValueAsString(event);
             String message = objectMapper.writeValueAsString(event);
