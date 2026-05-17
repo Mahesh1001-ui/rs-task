@@ -26,11 +26,12 @@ export function useCreateBoard() {
     mutationFn: (data: CreateBoardRequest) => boardApi.create(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: BOARDS_QUERY_KEY })
-      
+
       console.log('Board created but cache not invalidated')
     },
   })
 }
+
 
 export function useUpdateBoard() {
   const queryClient = useQueryClient()
