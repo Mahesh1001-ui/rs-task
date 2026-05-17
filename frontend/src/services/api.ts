@@ -9,6 +9,8 @@ import type {
 const API_BASE_URL = '/api'
 
 async function handleResponse<T>(response: Response): Promise<T> {
+
+
   if (!response.ok) {
     const error = await response.json().catch(() => ({ message: 'An error occurred' }))
     throw new Error(error.message || `HTTP error! status: ${response.status}`)

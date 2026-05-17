@@ -72,7 +72,8 @@ public class WebSocketEventHandler extends TextWebSocketHandler {
         // The event is being sent as toString() instead of JSON
         // Candidate needs to fix this to use objectMapper.writeValueAsString()
         try {
-            String message = event.toString(); // Should be: objectMapper.writeValueAsString(event);
+//            String message = event.toString(); // Should be: objectMapper.writeValueAsString(event);
+            String message = objectMapper.writeValueAsString(event);
             broadcastToSessions(sessions, message);
         } catch (Exception e) {
             log.error("Failed to serialize task event", e);

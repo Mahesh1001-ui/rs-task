@@ -80,9 +80,11 @@ public class BoardService {
         // BUG #1: This is doing hard delete instead of soft delete
         // The test expects: board.setDeleted(true); boardRepository.save(board);
         // But the implementation is:
-        boardRepository.delete(board);
+        board.setDeleted(true);
+        boardRepository.save(board);
 
         eventPublisher.publishEvent(BoardEvent.deleted(boardId));
         log.info("Deleted board: {}", boardId);
     }
+
 }

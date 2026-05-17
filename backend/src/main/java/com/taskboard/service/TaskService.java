@@ -109,7 +109,7 @@ public class TaskService {
         // Invalid: TODO -> DONE directly
         //
         // This validation is missing - candidate needs to implement it
-        // validateStatusTransition(currentStatus, newStatus);
+         validateStatusTransition(currentStatus, newStatus);
 
         task.setStatus(newStatus);
         Task updatedTask = taskRepository.save(task);
